@@ -58,9 +58,9 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     newNote.tag = tag;
   }
   try {
-    console.time("Find Note");
+    // console.time("Find Note");
     let note = await Note.findById(req.params.id);
-    console.timeEnd("Find Note");
+    // console.timeEnd("Find Note");
 
     if (!note) {
       return res.status(404).send("Not Found");
@@ -70,13 +70,13 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
       return res.status(401).send("Not Allowed");
     }
 
-    console.time("Update Note");
+    // console.time("Update Note");
     note = await Note.findByIdAndUpdate(
       req.params.id,
       { $set: newNote },
       { new: true }
     );
-    console.timeEnd("Update Note");
+    // console.timeEnd("Update Note");
 
     res.json({ note });
   } catch (error) {
@@ -125,9 +125,9 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
     }
 
     // Delete the note
-    console.time("Deleted Note");
+    // console.time("Deleted Note");
     await Note.findByIdAndDelete(req.params.id);
-    console.timeEnd("Deleted Note");
+    // console.timeEnd("Deleted Note");
 
     res.json({ Success: "Note is deleted" });
   } catch (error) {

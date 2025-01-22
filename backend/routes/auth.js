@@ -17,6 +17,7 @@ router.post(
     body("password", "Enter a larger password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success =false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -28,7 +29,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ error: " Sorry a User with this email already exists" });
+          .json({success, error: " Sorry a User with this email already exists" });
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -47,7 +48,8 @@ router.post(
       const authToken = jwt.sign(data, JWT_SECRET);
       // console.log(jwtData);
       // res.json(user)
-      res.json({ authToken });
+      success = true;
+      res.json({success, authToken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send(" Some Error occured");
@@ -63,6 +65,7 @@ router.post(
     body("password", "Password Can't be blank").exists(),
   ],
   async (req, res) => {
+    let success=false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -75,7 +78,8 @@ router.post(
       }
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res.status(400).json({ error: "Try correct Credentials" });
+        
+        return res.status(400).json({success, error: "Try correct Credentials" });
       }
       const data = {
         user: {
@@ -85,7 +89,8 @@ router.post(
       const authToken = jwt.sign(data, JWT_SECRET);
       // console.log(jwtData);
       // res.json(user)
-      res.json({ authToken });
+      success=true;
+      res.json({ success,authToken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send(" Interval Server Error occured");
