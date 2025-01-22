@@ -15,7 +15,7 @@ const Notes = (props) => {
   //   }
   //   // eslint-disable-next-line
   // }, []);
-  
+
   // eslint-disable-next-line
   const { notes, getNotes, editNote } = useContext(noteContext);
   const [note, setNote] = useState({
@@ -174,7 +174,7 @@ const Notes = (props) => {
         <div className="container">
           {notes.length === 0 && "No notes to display "}
         </div>
-        {notes.map((note,index) => {
+        {notes.map((note, index) => {
           return (
             <NoteItem
               key={note._id || index}

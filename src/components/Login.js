@@ -21,12 +21,10 @@ const Login = (props) => {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      props.showAlert("Logged Created Successfully","success")
+      props.showAlert("Logged Created Successfully", "success");
       navigate("/");
-      
-
     } else {
-      props.showAlert("Invalid Credentials","danger")
+      props.showAlert("Invalid Credentials", "danger");
     }
   };
   const onChange = (e) => {
@@ -34,8 +32,8 @@ const Login = (props) => {
   };
 
   return (
-    <div className="container mt-3" > 
-    <h2>Login to continue to NoteBook</h2>
+    <div className="container mt-3">
+      <h2>Login to continue to NoteBook</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">

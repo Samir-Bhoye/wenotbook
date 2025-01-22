@@ -14,8 +14,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          localStorage.getItem('token'),
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -44,7 +43,7 @@ const NoteState = (props) => {
       console.error("Error adding note:", error);
     }
   };
-  
+
   // const addNote = async (title, description, tag) => {
   //   // eslint-disable-next-line
   //   //TODO : API Call
@@ -58,7 +57,7 @@ const NoteState = (props) => {
   //     },
   //     body: JSON.stringify({ title, description, tag }),
   //   });
-  //   const note =  await response.json(); 
+  //   const note =  await response.json();
   //   setNotes(notes.concat(note));
   //   console.log("API Response:", note);
   //   console.log("adding a  note" + note);
@@ -72,13 +71,12 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-        localStorage.getItem('token'),
+        "auth-token": localStorage.getItem("token"),
       },
       // body: JSON.stringify({title,description,tag}),
     });
-     const json =  await response.json();
-     console.log(json);
+    const json = await response.json();
+    console.log(json);
 
     // console.log("deleting a  note" + id);
     const newNotes = notes.filter((note) => {
@@ -96,13 +94,12 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-        localStorage.getItem('token'),
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
-     const json = await response.json();
-console.log(json);
+    const json = await response.json();
+    console.log(json);
     let newNotes = JSON.parse(JSON.stringify(notes));
     //Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {

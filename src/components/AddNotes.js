@@ -6,12 +6,12 @@ const AddNotes = (props) => {
   const { addNote } = context;
   // eslint-disable-next-line
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
-  
+
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
-     setNote({ title: "", description: "", tag: "" })
-     props.showAlert("Note Added Successfully","success")
+    setNote({ title: "", description: "", tag: "" });
+    props.showAlert("Note Added Successfully", "success");
   };
 
   const onChange = (e) => {
@@ -39,10 +39,7 @@ const AddNotes = (props) => {
             />
           </div>
           <div className="mb-3">
-            <label
-              htmlFor="description"
-              className="form-label"            
-            >
+            <label htmlFor="description" className="form-label">
               Description
             </label>
             <input
@@ -57,7 +54,7 @@ const AddNotes = (props) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="tag" className="form-label" >
+            <label htmlFor="tag" className="form-label">
               Tag
             </label>
             <input
@@ -66,7 +63,7 @@ const AddNotes = (props) => {
               id="tag"
               name="tag"
               value={note.tag}
-              onChange={onChange}              
+              onChange={onChange}
               required
             />
           </div>

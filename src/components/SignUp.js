@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const SignUp = (props) => {
-    let navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ name:"",email: "", password: "",cpassword:"" });
+  let navigate = useNavigate();
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
-   const {name,email,password}=credentials;
+    const { name, email, password } = credentials;
     const response = await fetch("http://localhost:5000/api/auth/createuser", {
-      
-        method: "POST",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
         email,
-        password
+        password,
       }),
     });
     const json = await response.json();
@@ -23,18 +27,17 @@ const SignUp = (props) => {
     if (json.success) {
       localStorage.setItem("token", json.authToken);
       navigate("/");
-      props.showAlert("Account Created Successfully","success")
+      props.showAlert("Account Created Successfully", "success");
     } else {
-     props.showAlert("Invalid Credentials","danger")
+      props.showAlert("Invalid Credentials", "danger");
     }
   };
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    
-       <div className="container mt-3" > 
-       <h2>SignUp to continue to NoteBook</h2>
+    <div className="container mt-3">
+      <h2>SignUp to continue to NoteBook</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
